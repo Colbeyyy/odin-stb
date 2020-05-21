@@ -1,3 +1,7 @@
+@echo off
+
+call setup_cl.bat
+
 if not exist "..\lib" mkdir ..\lib
 
 cl -nologo -MT -TC -O2 -c stb_image.c stb_image_write.c stb_truetype.c stb_rect_pack.c
