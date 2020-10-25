@@ -110,6 +110,7 @@ foreign stbtt {
     stbtt_PackFontRangesGatherRects :: proc(spc: ^stbtt_pack_context, info: ^stbtt_fontinfo, ranges: ^stbtt_pack_range, num_ranges: i32, rects: ^stbrp_rect) -> i32 ---; // NOTE: These are not wrapped
     stbtt_PackFontRangesPackRects :: proc(spc: ^stbtt_pack_context, rects: ^stbrp_rect, num_rects: i32) ---; // NOTE: These are not wrapped
     stbtt_PackFontRangesRenderIntoRects :: proc(spc: ^stbtt_pack_context, info: ^stbtt_fontinfo, ranges: ^stbtt_pack_range, num_ranges: i32, rects: ^stbrp_rect) -> i32 ---; // NOTE: These are not wrapped
+    stbtt_PackSetSkipMissingCodepoints :: proc(spc: ^stbtt_pack_context, skip: i32) ---;
 }
 
 // wrappers
@@ -142,6 +143,10 @@ get_packed_quad :: proc(chardata: []Packed_Char, pw, ph, char_index: int, align_
     q: Aligned_Quad;
     stbtt_GetPackedQuad(&chardata[0], i32(pw), i32(ph), i32(char_index), &xpos, &ypos, &q, i32(align_to_integer));
     return xpos, ypos, q;
+}
+
+pack_set_skip_missing_codepoints :: proc(spc: ^Pack_Context, skip: bool) {
+    stbtt_PackSetSkipMissingCodepoints(spc, i32(skip));
 }
 
 
